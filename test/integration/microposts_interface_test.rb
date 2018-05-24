@@ -10,6 +10,8 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     get root_path
     assert_select 'div.pagination'
     assert_select 'input[type=?]', 'file', count: 1
+    assert_select 'strong#following'
+    assert_select 'strong#followers'
     # 無効な送信
     assert_no_difference 'Micropost.count' do
       post microposts_path, params: { micropost: { content: "" } }
